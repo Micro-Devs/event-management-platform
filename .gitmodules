@@ -1,0 +1,12 @@
+[submodule "services/event-service"]
+	path = services/event-service
+	url = https://github.com/Micro-Devs/event-service.git
+[submodule "services/user-service"]
+	path = services/user-service
+	url = https://github.com/Micro-Devs/user-service.git
+[submodule "services/gateway-service"]
+	path = services/gateway-service
+	url = https://github.com/Micro-Devs/gateway-service.git
+[submodule "services/eureka-server"]
+	path = services/eureka-server
+	url = https://github.com/Micro-Devs/eureka-server.git

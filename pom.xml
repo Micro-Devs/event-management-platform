@@ -15,4 +15,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <modules>
+        <module>services/eureka-server</module>
+        <module>services/event-service</module>
+        <module>services/gateway-service</module>
+        <module>services/user-service</module>
+    </modules>
 </project>
