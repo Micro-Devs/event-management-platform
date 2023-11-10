@@ -10,3 +10,6 @@
 [submodule "services/eureka-server"]
 	path = services/eureka-server
 	url = https://github.com/Micro-Devs/eureka-server.git
+[submodule "side/base-package"]
+	path = side/base-package
+	url = https://github.com/Micro-Devs/base-package.git
