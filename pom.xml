@@ -20,5 +20,6 @@
         <module>services/event-service</module>
         <module>services/gateway-service</module>
         <module>services/user-service</module>
+        <module>side/base-package</module>
     </modules>
 </project>
