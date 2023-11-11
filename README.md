@@ -26,3 +26,16 @@ git checkout dev
 ```
 git pull
 ```
+
+
+## <p align="center"> Docker / Kafka Commands </p>
+docker exec -it [Kafka_Container_ID] /bin/bash
+
+new topic: kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions [Partition_Sayısı] --topic [Topic_Adı]
+
+ex: kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3 --topic myTopic
+
+get all topic list: kafka-topics.sh --list --bootstrap-server localhost:9092
+
+## <p align="center"> Compose Commands </p>
+docker-compose up -d
