@@ -1,3 +1,6 @@
+[submodule "services/auth-service"]
+	path = services/auth-service
+	url = https://github.com/Micro-Devs/auth-service.git
 [submodule "services/event-service"]
 	path = services/event-service
 	url = https://github.com/Micro-Devs/event-service.git
