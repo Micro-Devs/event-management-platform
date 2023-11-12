@@ -6,7 +6,7 @@ git clone --recurse-submodules https://github.com/Micro-Devs/event-management-pl
 ```
 <br/>
 
-- <strong> Apply the commands below to update existing submodule. <strong>
+- <strong> Apply the commands below to update existing submodule. </strong>
 
 ```
 git submodule init
@@ -29,7 +29,7 @@ git pull
 
 <br/>
 
-- <strong> To add a submodule <strong>
+- <strong> To add a submodule </strong>
 
 ```
 git submodule add https://github.com/Micro-Devs/[service-name].git services/[service-name]
