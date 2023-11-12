@@ -27,6 +27,14 @@ git checkout dev
 git pull
 ```
 
+<br/>
+
+- <strong> To add a submodule <strong>
+
+```
+git submodule add https://github.com/Micro-Devs/[service-name].git services/[service-name]
+```
+
 
 ## <p align="center"> Docker / Kafka Commands </p>
 docker exec -it [Kafka_Container_ID] /bin/bash
