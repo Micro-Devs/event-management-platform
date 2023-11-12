@@ -4,6 +4,11 @@
 ```
 git clone --recurse-submodules https://github.com/Micro-Devs/event-management-platform.git
 ```
+
+``
+git checkout main && git submodule foreach 'git checkout main'
+``
+
 <br/>
 
 - <strong> Apply the commands below to update existing submodule. </strong>
