@@ -40,6 +40,14 @@ git pull
 git submodule add https://github.com/Micro-Devs/[service-name].git services/[service-name]
 ```
 
+<br/>
+
+- <strong> To pull all submodules </strong>
+
+```
+git pull --recurse-submodules
+```
+
 
 ## <p align="center"> Docker / Kafka Commands </p>
 docker exec -it [Kafka_Container_ID] /bin/bash
