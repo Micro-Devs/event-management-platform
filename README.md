@@ -5,9 +5,12 @@
 git clone --recurse-submodules https://github.com/Micro-Devs/event-management-platform.git
 ```
 
-``
+<br/>
+
+- <strong> Checkout to main for all submodules </strong>
+```
 git checkout main && git submodule foreach 'git checkout main'
-``
+```
 
 <br/>
 
