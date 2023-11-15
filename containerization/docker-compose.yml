@@ -1,6 +1,127 @@
 version: '3'
 
 services:
+  user-service:
+    image: merttkayaa/user-service:latest
+    container_name: user-service
+    ports:
+      - "9002:9002"
+    depends_on:
+      - user-db
+      - eureka-server
+      - zookeeper
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-db:5432/user_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    networks:
+      - general
+
+  user-service-instance:
+    image: merttkayaa/user-service-instance:latest
+    container_name: user-service-instance
+    ports:
+      - "9003:9003"
+    depends_on:
+      - user-db
+      - eureka-server
+      - zookeeper
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-db:5432/user_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    networks:
+      - general
+
+  user-db:
+    image: 'postgres:13.1-alpine'
+    container_name: user-db
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: user_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - general
+
+  event-service:
+    image: muholo/event-service:latest
+    container_name: event-service
+    ports:
+      - "9001:9001"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://event-db:5432/event_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - JASYPT_ENCRYPTOR_PASSWORD=admin
+    depends_on:
+      - eureka-server
+      - event-db
+      - redis
+      - zookeeper
+    networks:
+      - general
+
+  event-db:
+    image: 'postgres:13.1-alpine'
+    container_name: event-db
+    volumes:
+      - event_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: event_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - general
+
+  eureka-server:
+    image: muholo/eureka-server:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - general
+
+  gateway-service:
+    image: merttkayaa/gateway-service:latest
+    container_name: gateway-service
+    ports:
+      - "8765:8765"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    restart: always
+    depends_on:
+      - eureka-server
+      - user-service
+      - user-service-instance
+    networks:
+      - general
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   zookeeper:
     image: 'bitnami/zookeeper:latest'
     ports:
@@ -46,3 +167,12 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
+
+volumes:
+  redis_data:
+  event_db_data:
+  user_db_data:
+
+networks:
+  general:
+    driver: bridge
