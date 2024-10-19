@@ -13,9 +13,6 @@
 [submodule "side/base-package"]
 	path = side/base-package
 	url = https://github.com/Micro-Devs/base-package.git
-[submodule "services/auth-service"]
-	path = services/auth-service
-	url = https://github.com/Micro-Devs/auth-service.git
 [submodule "services/ticket-service"]
 	path = services/ticket-service
 	url = https://github.com/Micro-Devs/ticket-service.git
